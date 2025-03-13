@@ -1,29 +1,26 @@
 <script setup lang="tsx">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import Dialog from '@/components/Dialog/Dialog.vue'
+const dialogVisible = ref(false)
 import ContentAI from './ContentAI.vue'
 import ChatNav from './ChatNav.vue'
-
-const chatAiVisible = ref(false)
 const sessionId = ref('')
-const clickAiSwitch = () => {
-  chatAiVisible.value = !chatAiVisible.value
-}
-const clickStop = () => {
-  return false
-}
+onMounted(async () => {
+  sessionId.value = '';
+})
 const clickChatSession = (clickSessionId:any) => {
   sessionId.value = clickSessionId
 }
 </script>
 
 <template>
-  <div class="customDialog" v-if="chatAiVisible" @click="clickAiSwitch">
-    <div class="aiContainer" @click.stop="clickStop">
+  <Dialog v-model="dialogVisible">
+    <div class="aiContainer">
       <ChatNav @clickChatSession="clickChatSession" />
       <ContentAI :sessionId="sessionId" />
     </div>
-  </div>
-  <div class="aiSwitch" @click="clickAiSwitch">AI</div>
+  </Dialog>
+  <div class="aiSwitch" @click="dialogVisible = !dialogVisible">AI</div>
 </template>
 <style scoped>
 .aiContainer{
@@ -31,10 +28,9 @@ const clickChatSession = (clickSessionId:any) => {
   display: flex;
   width: 50vw;
   height: 96vh;
-  top: 2vh;
-  left: 25vw;
   background: white;
   border-radius: 5px;
+  overflow: hidden;
 }
 
 .aiSwitch{

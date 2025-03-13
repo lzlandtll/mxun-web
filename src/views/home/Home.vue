@@ -1,5 +1,5 @@
 <script setup>
-import ChatAI from "@/views/ChatAI1/ChatAI.vue";
+import ChatAI from "@/views/ChatAI/ChatAI.vue";
 import Nav from "@/views/Nav/Nav.vue";
 </script>
 

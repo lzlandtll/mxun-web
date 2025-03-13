@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
 
 import {userStoreHandler} from '@/store/modules/user'
+import {ElMessage} from "element-plus";
 
 const userStore = userStoreHandler()
 // 定义回调函数类型
@@ -68,6 +69,12 @@ const WSService = {
     updateMessage(message: string) {
         websocketState.message = message;
         let data = JSON.parse(message);
+        if(data["code"] != "200"){
+            ElMessage({
+                message: data["info"],
+                type: 'warning',
+            })
+        }
         // 调用订阅的方法，通知其他组件
         if (websocketState.callback && websocketState.callback[data.type]) {
             websocketState.callback[data.type](data);

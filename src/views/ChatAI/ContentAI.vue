@@ -33,6 +33,10 @@ onMounted(() => {
   WSService.subscribe("02",(message:any) => {
     receiveAiMessage(message);  // 通过方法控制显示
   });
+
+  if(sessionId){
+    refreshMessageList()
+  }
 })
 
 const receiveAiMessage = (message:any) => {
@@ -56,7 +60,7 @@ const clickSendQuestion = async (question:any) => {
   let chatMessage = {'sessionId': sessionId.value, 'content': question, 'role': 'user'}
   messageList.value.push(chatMessage)
   let res = await sendQuestion(chatMessage)
-  sessionId.value = res['data']['sessionId']
+  sessionId.value = res['data']['data']['sessionId']
 }
 
 const refreshMessageList = async () => {
