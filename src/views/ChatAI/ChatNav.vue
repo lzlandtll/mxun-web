@@ -37,7 +37,7 @@ const onAi = async () => {
   onAiKeyDialogVisible.value = false
   const res = await addAiKey(aiKey.value);
   if (res["data"]["code"] == "200") {
-    userStore.addRole(RoleEnum.CHAT_AI.roleId)
+    userStore.addRole(RoleEnum.CHAT_AI.roleCode)
     ElMessage({
       message: 'AI权限已开通...',
       type: 'success',
@@ -49,7 +49,7 @@ const offAi = async () => {
   offAiKeyDialogVisible.value = false
   const res = await removeAiKey()
   if (res["data"]["code"] == "200") {
-    userStore.removeRole(RoleEnum.CHAT_AI.roleId)
+    userStore.removeRole(RoleEnum.CHAT_AI.roleCode)
     ElMessage({
       message: 'AI权限已关闭...',
       type: 'success',
@@ -68,8 +68,8 @@ const offAi = async () => {
       {{chatSession['title']}}
       <img @click.stop="clickRemoveChatSession(chatSession['sessionId'])" class="removeImg" src="@/assets/imgs/remove.png" />
     </div>
-    <el-button v-if="!userStore.hasRole(RoleEnum.CHAT_AI.roleId)" @click="onAiKeyDialogVisible = true" type="success" class="radiusButton stickBottom">开通AI权限</el-button>
-    <el-button v-if="userStore.hasRole(RoleEnum.CHAT_AI.roleId)" @click="offAiKeyDialogVisible = true" type="warning" class="radiusButton stickBottom">关闭AI权限</el-button>
+    <el-button v-if="!userStore.hasRole(RoleEnum.CHAT_AI.roleCode)" @click="onAiKeyDialogVisible = true" type="success" class="radiusButton stickBottom">开通AI权限</el-button>
+    <el-button v-if="userStore.hasRole(RoleEnum.CHAT_AI.roleCode)" @click="offAiKeyDialogVisible = true" type="warning" class="radiusButton stickBottom">关闭AI权限</el-button>
   </div>
   <el-dialog v-model="onAiKeyDialogVisible" title="请输入通义千问AI密钥">
     <el-input v-model="aiKey" autocomplete="off" />

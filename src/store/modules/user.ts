@@ -10,7 +10,7 @@ interface UserInfo {
     tel: string
     email: string
     token: string
-    roles: number[]
+    roleCodes: string[]
 }
 
 export const useUserStore = defineStore('user', {
@@ -31,16 +31,16 @@ export const useUserStore = defineStore('user', {
         setUserInfo(userInfo: UserInfo) {
             this.userInfo = userInfo
         },
-        addRole(role: number) {
-            if (!this.userInfo.roles.includes(role)) {
-                this.userInfo.roles.push(role); // 添加新角色
+        addRole(roleCode: string) {
+            if (!this.userInfo.roleCodes.includes(roleCode)) {
+                this.userInfo.roleCodes.push(roleCode); // 添加新角色
             }
         },
-        removeRole(role: number) {
-            this.userInfo.roles = this.userInfo.roles.filter(r => r !== role); // 删除指定角色
+        removeRole(roleCode: string) {
+            this.userInfo.roleCodes = this.userInfo.roleCodes.filter(r => r !== roleCode); // 删除指定角色
         },
-        hasRole(role: number): boolean {
-            return this.userInfo.roles.includes(role); // 使用 includes 方法检查角色存在性
+        hasRole(roleCode: string): boolean {
+            return this.userInfo.roleCodes.includes(roleCode); // 使用 includes 方法检查角色存在性
         }
     },
     persist: true
