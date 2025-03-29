@@ -9,12 +9,15 @@ const userStore = userStoreHandler()
 const emit = defineEmits(['eventCallback']);
 const user = ref({
   username: '18311516877',
-  password: '123456'
+  password: '123456Tll!'
 })
 
 
 const doAccountLogin = () => {
-  RSAEncoder.encode(user.value.password).then(async password => {
+  const shanghaiTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Shanghai" });
+  const shanghaiTimestamp = Date.parse(shanghaiTime);
+
+  RSAEncoder.encode(shanghaiTimestamp + "@" + user.value.password).then(async password => {
     let loginUser = {
       username: user.value.username,
       password: password
