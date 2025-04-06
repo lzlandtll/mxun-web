@@ -3,9 +3,8 @@
 import {onMounted, ref} from "vue"
 import { getChatSessionList, removeChatSession, addAiKey, removeAiKey } from "@/api/chatai"
 import {ElMessage} from "element-plus";
-import { userStoreHandler } from '@/store/modules/user'
+import userStore  from '@/store/modules/user'
 import { RoleEnum } from '@/enums/role'
-const userStore = userStoreHandler()
 
 const chatSessionList = ref([])
 onMounted(async () => {
@@ -17,7 +16,7 @@ onMounted(async () => {
 
 const refreshChatSessionList = async () => {
   let res = await getChatSessionList()
-  chatSessionList.value = res['data']['data']
+  chatSessionList.value = res.data
 }
 const emit = defineEmits(['clickChatSession'])
 const clickChatSession = (sessionId:any) => {
@@ -36,7 +35,7 @@ const offAiKeyDialogVisible = ref(false)
 const onAi = async () => {
   onAiKeyDialogVisible.value = false
   const res = await addAiKey(aiKey.value);
-  if (res["data"]["code"] == "200") {
+  if (res.code == "200") {
     userStore.addRole(RoleEnum.CHAT_AI.roleCode)
     ElMessage({
       message: 'AI权限已开通...',
@@ -48,7 +47,7 @@ const onAi = async () => {
 const offAi = async () => {
   offAiKeyDialogVisible.value = false
   const res = await removeAiKey()
-  if (res["data"]["code"] == "200") {
+  if (res.code == "200") {
     userStore.removeRole(RoleEnum.CHAT_AI.roleCode)
     ElMessage({
       message: 'AI权限已关闭...',

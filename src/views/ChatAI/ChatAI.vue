@@ -14,13 +14,15 @@ const clickChatSession = (clickSessionId:any) => {
 </script>
 
 <template>
-  <Dialog v-model="dialogVisible">
-    <div class="aiContainer">
-      <ChatNav @clickChatSession="clickChatSession" />
-      <ContentAI :sessionId="sessionId" />
-    </div>
-  </Dialog>
-  <div class="aiSwitch" @click="dialogVisible = !dialogVisible">AI</div>
+  <div>
+    <Dialog v-model="dialogVisible">
+      <div class="aiContainer">
+        <ChatNav @clickChatSession="clickChatSession" />
+        <ContentAI :sessionId="sessionId" />
+      </div>
+    </Dialog>
+    <div class="aiSwitch" @click="dialogVisible = !dialogVisible">AI</div>
+  </div>
 </template>
 <style scoped>
 .aiContainer{
@@ -45,6 +47,6 @@ const clickChatSession = (clickSessionId:any) => {
   text-align: center;
   line-height: 38px;
   font-size: 20px;
-  z-index: 2;
+  z-index: 8;
 }
 </style>

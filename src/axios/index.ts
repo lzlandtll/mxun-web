@@ -1,9 +1,8 @@
-import axios, {RawAxiosRequestHeaders} from 'axios';
+import axios, {type AxiosResponse, RawAxiosRequestHeaders} from 'axios';
 import { CONTENT_TYPE } from '@/constants'
-import {userStoreHandler} from '@/store/modules/user'
+import userStore from '@/store/modules/user'
 import { ElMessage } from 'element-plus'
-
-const userStore = userStoreHandler()
+import {SUCCESS_CODE} from "../constants";
 
 // 创建一个简单的axios实例
 const service = axios.create({
@@ -43,14 +42,12 @@ const request = (option: AxiosConfig) => {
 // 请求拦截器：在请求发送之前执行的逻辑
 service.interceptors.request.use(
     (config) => {
-      console.log('url: ', config['url'])
-      console.log('token: ', userStore.getToken)
       let url = config['url'] || ""
       if(url.startsWith('/open')){
         return config;
       }
       if(userStore.getToken){
-        config['headers']['Authorization'] = `Bearer ${userStore.getToken}`;
+        config['headers']['Authorization'] = `Bearer ${userStore.getToken()}`;
         return config;
       }
       ElMessage({
@@ -64,23 +61,39 @@ service.interceptors.request.use(
     }
 );
 // 响应拦截器：在响应返回之后执行的逻辑
-service.interceptors.response.use(
-    (response) => {
-        if(response && response['status'] == 200 && response['data']['code'] == "200"){
-            // 这里是正确响应的
-            return response;
-        }
+// service.interceptors.response.use(
+//     (response) => {
+//         if(response && response['status'] == 200 && response['data']['code'] == "200"){
+//             // 这里是正确响应的
+//             return response;
+//         }
+//         ElMessage({
+//             message: response['data']['info'],
+//             type: 'warning',
+//         })
+//         return response;
+//     },
+//     (error) => {
+//       // 在响应返回之后可以添加一些逻辑，例如处理错误响应
+//       return Promise.reject(error);
+//     }
+// );
+const defaultResponseInterceptors = (response: AxiosResponse) => {
+    if (response?.config?.responseType === 'blob') {
+        // 如果是文件流，直接过
+        return response
+    } else if (response && response['status'] == 200 && response.data.code === SUCCESS_CODE) {
+        return response.data
+    } else {
         ElMessage({
             message: response['data']['info'],
             type: 'warning',
         })
-        return response;
-    },
-    (error) => {
-      // 在响应返回之后可以添加一些逻辑，例如处理错误响应
-      return Promise.reject(error);
+        return Promise.reject(response?.data?.info)
     }
-);
+}
+
+service.interceptors.response.use(defaultResponseInterceptors)
 /**
  * 导出的方法，用于发起不同类型的HTTP请求
  */

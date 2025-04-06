@@ -16,7 +16,6 @@ const switchAccountInfo = () => {
 }
 
 const eventCallback = (type) => {
-  console.log("children event type", type)
   switch(type){
     case "01":
       dialogVisible.value = false;
@@ -29,22 +28,24 @@ const eventCallback = (type) => {
 </script>
 
 <template>
-  <Dialog v-model="dialogVisible">
-    <div class="dialogContent">
-      <div class="flexItem gapLineBox"></div>
-      <div class="flexItem ">
-        <div class="switchAccountInfo" @click="switchAccountInfo">
-          <div v-if="accountInfoIndex == '02'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登录</div>
-          <div v-if="accountInfoIndex != '02'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册</div>
-        </div>
-        <div class="accountInfo">
-          <AccountLogin v-if="accountInfoIndex == '01'" @eventCallback="eventCallback"></AccountLogin>
-          <AccountRegister v-if="accountInfoIndex == '02'" @eventCallback="eventCallback"></AccountRegister>
+  <div>
+    <Dialog v-model="dialogVisible">
+      <div class="dialogContent">
+        <div class="flexItem gapLineBox"></div>
+        <div class="flexItem ">
+          <div class="switchAccountInfo" @click="switchAccountInfo">
+            <div v-if="accountInfoIndex == '02'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登录</div>
+            <div v-if="accountInfoIndex != '02'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册</div>
+          </div>
+          <div class="accountInfo">
+            <AccountLogin v-if="accountInfoIndex == '01'" @eventCallback="eventCallback"></AccountLogin>
+            <AccountRegister v-if="accountInfoIndex == '02'" @eventCallback="eventCallback"></AccountRegister>
+          </div>
         </div>
       </div>
-    </div>
-  </Dialog>
-  <div class="loginSwitch" @click="dialogVisible = !dialogVisible"></div>
+    </Dialog>
+    <div class="loginSwitch" @click="dialogVisible = !dialogVisible"></div>
+  </div>
 </template>
 <style scoped>
 .dialogContent{
@@ -102,18 +103,12 @@ const eventCallback = (type) => {
 
 
 .loginSwitch{
-  margin-top: calc(var(--nav-height) / 2);
-  right: 20px;
-  transform: translateY(-50%);
+  display: inline-block;
   width: 36px;
   height: 36px;
   border-radius: 20px;
   background: url('@/assets/imgs/login.png');
   background-size: 100% 100%;
   color: #e5ab3d;
-  text-align: center;
-  line-height: 34px;
-  font-size: 20px;
-  z-index: 9999999999;
 }
 </style>

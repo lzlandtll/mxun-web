@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { store } from '../index'
+import StringUtil from '@/utils/StringUtil'
 
 interface UserState {
     userInfo: UserInfo
@@ -41,11 +41,25 @@ export const useUserStore = defineStore('user', {
         },
         hasRole(roleCode: string): boolean {
             return this.userInfo.roleCodes.includes(roleCode); // 使用 includes 方法检查角色存在性
+        },
+        hasLogin():boolean {
+            return StringUtil.isNotEmpty(this.userInfo.token);
+        },
+        isSelf(userId: number):boolean {
+            return this.userInfo.id == userId
         }
     },
     persist: true
 })
 
-export const userStoreHandler = () => {
-    return useUserStore(store)
+const useUserStoreInstance = useUserStore();
+export default {
+    getUserInfo: () => useUserStoreInstance.getUserInfo,
+    getToken: () => useUserStoreInstance.getToken,
+    setUserInfo: (userInfo: UserInfo) => useUserStoreInstance.setUserInfo(userInfo),
+    addRole: (roleCode: string) => useUserStoreInstance.addRole(roleCode),
+    removeRole: (roleCode: string) => useUserStoreInstance.removeRole(roleCode),
+    hasRole: (roleCode: string) => useUserStoreInstance.hasRole(roleCode),
+    hasLogin: () => useUserStoreInstance.hasLogin(),
+    isSelf: (userId: number) => useUserStoreInstance.isSelf(userId)
 }

@@ -1,0 +1,128 @@
+
+/* custom-styles.css */
+
+/* 设置编辑器的宽度和高度 */
+.v-md-editor {
+    width: 100%;
+    height: 100%;
+}
+
+/* 调整编辑器包装器的背景颜色 */
+.v-md-editor__editor-wrapper .scrollbar__wrap {
+    background-color: #fafafa;
+}
+
+/* 调整文本区域的背景颜色 */
+.v-md-textarea-editor textarea {
+    background-color: #fafafa;
+}
+
+/* 设置代码文本的颜色和背景颜色 */
+.vuepress-markdown-body code {
+    color: #c7254e;
+    background-color: #f9f2f4;
+}
+
+/* 设置h1元素的字体大小 */
+.vuepress-markdown-body h1 {
+    font-size: 2rem;
+}
+
+/* 移除h2元素的底部边框 */
+.vuepress-markdown-body h2 {
+    border-bottom: none;
+}
+
+/* 设置目录导航项的样式 */
+.v-md-editor__toc-nav-item {
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    color: #2c3e50;
+    line-height: 24px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+/* 设置目录导航标题的样式 */
+.v-md-editor__toc-nav-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 鼠标悬停时更新目录导航标题的样式 */
+.v-md-editor__toc-nav-item:hover .v-md-editor__toc-nav-title {
+    font-size: 14px;
+    color: #c7254e;
+    font-weight: bold;
+}
+
+/* 设置区块引用的样式 */
+.vuepress-markdown-body blockquote {
+    border-left: .2rem solid #8abae9;
+    background-color: #fafafa;
+}
+
+/* 设置表格的基本样式 */
+.vuepress-markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+}
+
+/* 设置表格表头单元格的样式 */
+.vuepress-markdown-body table thead tr th {
+    background-color: #f2f2f2;
+    font-size: 14px;
+}
+
+/* 设置表格表体单元格的样式 */
+.vuepress-markdown-body table tbody tr th {
+    font-size: 14px;
+}
+
+/* 调整提示信息段落的上边距 */
+.v-md-plugin-tip p {
+    margin-top: 10px;
+}
+
+/* 设置无序列表和有序列表的样式 */
+.vuepress-markdown-body ol, .vuepress-markdown-body ul {
+    margin: 5px 0;
+    padding-left: 1.1em;
+}
+
+/* 设置提示信息框的样式 */
+.v-md-plugin-tip.tip {
+    background-color: #c6f3e0a1;
+}
+
+/* 设置详情提示信息框的样式 */
+.v-md-plugin-tip.details {
+    border-left-width: 5px;
+    border-color: #aaaaaa;
+    border-left-style: solid;
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    background-color: #eee;
+}
+
+/* 设置提示信息框的公共样式 */
+.v-md-plugin-tip.tip,
+.v-md-plugin-tip.danger,
+.v-md-plugin-tip.details,
+.v-md-plugin-tip.warning {
+    border-radius: 5px;
+    border-left-width: 5px;
+}
+
+/* 隐藏提示信息框的标题 */
+.v-md-plugin-tip .v-md-plugin-tip-title {
+    display: none;
+}
+
+.vuepress-markdown-body {
+    padding: 1rem 1rem !important;
+}

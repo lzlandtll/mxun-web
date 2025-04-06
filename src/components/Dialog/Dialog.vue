@@ -40,8 +40,8 @@ const clickStop = () => {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(150, 150, 150, 0.3);
-  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9;
 }
 
 .dialogInnerWrapper{

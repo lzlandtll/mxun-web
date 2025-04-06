@@ -60,14 +60,14 @@ const clickSendQuestion = async (question:any) => {
   let chatMessage = {'sessionId': sessionId.value, 'content': question, 'role': 'user'}
   messageList.value.push(chatMessage)
   let res = await sendQuestion(chatMessage)
-  sessionId.value = res['data']['data']['sessionId']
+  sessionId.value = res.data.sessionId
 }
 
 const refreshMessageList = async () => {
   messageList.value = []
   if(sessionId.value){
     let res = await getMessageList(sessionId.value)
-    messageList.value = res['data']['data']
+    messageList.value = res.data
   }
 }
 </script>

@@ -27,7 +27,7 @@ const doAccountRegister = () => {
       code: user.value.code
     }
     let res = await registerAccount(registerUser);
-    if(res['data']['code'] == "200"){
+    if(res.code == "200"){
       ElMessage({
         message: '注册成功...',
         type: 'success',

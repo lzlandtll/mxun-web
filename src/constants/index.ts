@@ -1,7 +1,7 @@
 /**
  * 请求成功状态码
  */
-export const SUCCESS_CODE = 2000
+export const SUCCESS_CODE = "200"
 /**
  * 请求token无效，退出登录
  * */
@@ -41,3 +41,11 @@ export const TRANSFORM_REQUEST_DATA = true
  * 全局图标前缀
  */
 export const ICON_PREFIX = 'vi-'
+
+export const SEARCH_PATH = "/search"
+
+export const WRITE_PATH = "/write"
+
+export const USER_PATH = "/user"
+
+export const ARTICLE_DETAIL = "/articleDetail"

@@ -2,13 +2,13 @@
 import {ref} from "vue";
 import { accountLogin } from '@/api/login'
 import RSAEncoder from '@/utils/RSAEncoder'
-import { userStoreHandler } from '@/store/modules/user'
 import {ElMessage} from "element-plus";
 
-const userStore = userStoreHandler()
+import userStore from '@/store/modules/user'
+
 const emit = defineEmits(['eventCallback']);
 const user = ref({
-  username: '18311516877',
+  username: '18311516874',
   password: '123456Tll!'
 })
 
@@ -23,8 +23,8 @@ const doAccountLogin = () => {
       password: password
     }
     let res = await accountLogin(loginUser);
-    if(res['data']['code'] == "200"){
-      userStore.setUserInfo(res['data']['data'])
+    if(res.code == "200"){
+      userStore.setUserInfo(res.data)
       ElMessage({
         message: '登录成功...',
         type: 'success',

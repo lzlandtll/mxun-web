@@ -1,13 +1,16 @@
 :root {
-  --nav-height: 50px;
+  --nav-height: 40px;
+  --out-padding: 4px;
+  --inner-padding: 8px;
+  --border-radius: 5px;
 }
 
 html, body {
   position: relative;
   margin: 0; /* 移除默认的外边距 */
-  padding: 0; /* 移除默认的内边距 */
-  width: 100%; /* 设置宽度为100% */
-  height: 100%; /* 设置高度为100% */
+  padding: 0 var(--out-padding) var(--out-padding) var(--out-padding); /* 移除默认的内边距 */
+  width: calc(100vw - var(--out-padding) * 2); /* 设置宽度为100% */
+  height: calc(100vh - var(--out-padding)); /* 设置高度为100% */
   box-sizing: border-box; /* 确保padding和border包含在元素的宽高内 */
   overflow: hidden; /* 防止滚动条出现，除非内容超出视口 */
 }
@@ -15,10 +18,13 @@ html, body {
 #app{
   width: 100%;
   height: 100%;
-  max-width: 100%;
   padding: 0;
+  overflow: auto;
 }
 
+#app::-webkit-scrollbar {
+  display: none;
+}
 /* 浅色模式 */
 @media (prefers-color-scheme: light) {
   :root {

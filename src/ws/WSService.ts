@@ -1,9 +1,8 @@
 import { reactive } from 'vue';
 
-import {userStoreHandler} from '@/store/modules/user'
+import userStore from '@/store/modules/user'
 import {ElMessage} from "element-plus";
 
-const userStore = userStoreHandler()
 // 定义回调函数类型
 interface CallbackMap {
     [key: string]: (data: any) => void;
@@ -27,7 +26,7 @@ let checkHeartInterval: number | null = null; // 使用number代替NodeJS.Timeou
 const WSService = {
     connect() {
         if (!websocketState.connected || !websocketState.socket) {
-            const socket = new WebSocket(`ws://localhost:18080/saas/ws?token=${userStore.getToken}`);
+            const socket = new WebSocket(`ws://localhost:18080/saas/ws?token=${userStore.getToken()}`);
 
             socket.onopen = () => {
                 websocketState.connected = true;
